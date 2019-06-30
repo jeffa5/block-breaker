@@ -1,5 +1,10 @@
 [package]
 name = "block-breaker"
+description = "A library for the block breaker game"
+repository = "https://github.com/jeffa5/block-breaker"
+readme = "README.md"
+license = "MIT"
+keywords = ["game", "block", "breaker"]
 version = "0.1.0"
 authors = ["Jeffas <dev@jeffas.io>"]
 edition = "2018"
