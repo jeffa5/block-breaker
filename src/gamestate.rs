@@ -1,6 +1,7 @@
 use crate::ball::Ball;
 use crate::bar::Bar;
 use crate::block::Block;
+use crate::config::Config;
 use crate::dimensions::Dimensions;
 use crate::position::Position;
 use crate::rand::Rng;
@@ -20,9 +21,9 @@ pub struct GameState {
 
 impl GameState {
     /// Create a new GameState struct.
-    /// Uses width and height to set the game dimensions and along with block_density generate the blocks in the game.
+    /// Uses width and height to set the game dimensions and along with the config generate the blocks in the game.
     /// Generation of the blocks uses some padding around the game_dimensions so blocks aren't too close to the edge.
-    pub fn new(width: u16, height: u16, block_density: f64) -> GameState {
+    pub fn new(width: u16, height: u16, config: Config) -> GameState {
         let block_dimensions = Dimensions::new(3, 1);
         let mut blocks = Vec::new();
         for x in ((width / 10)..(width * 9 / 10)).step_by(block_dimensions.width() as usize) {
@@ -33,22 +34,25 @@ impl GameState {
             }
             for y in ((height / 10)..(height * 7 / 10)).step_by(block_dimensions.height() as usize)
             {
-                if rand::thread_rng().gen_bool(block_density) {
-                    blocks.push(Block::new(Position::new(x, y), block_dimensions.clone(), 1))
+                if rand::thread_rng().gen_bool(config.block_density) {
+                    blocks.push(Block::new(
+                        Position::new(x, y),
+                        block_dimensions.clone(),
+                        config.block_strength,
+                    ))
                 }
             }
         }
         let game_dimensions = Dimensions::new(width, height);
-        let bar_width = 10;
         GameState {
             ball: Ball::new(
                 Position::new(width / 2, height / 2),
                 game_dimensions.clone(),
-                1,
+                config.ball_power,
             ),
             bar: Bar::new(
-                Position::new((width / 2) - (bar_width / 2), height / 2),
-                Dimensions::new(bar_width, 1),
+                Position::new((width / 2) - (config.bar_width / 2), height / 2),
+                Dimensions::new(config.bar_width, 1),
                 game_dimensions.clone(),
             ),
             blocks,
