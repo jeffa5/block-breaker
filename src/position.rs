@@ -1,12 +1,14 @@
 use crate::vector::Vector;
 use std::ops::{Add, AddAssign, Sub, SubAssign};
 
+/// A generic position
 pub struct Position {
     x: f64,
     y: f64,
 }
 
 impl Position {
+    /// Create a new position
     pub fn new(x: u16, y: u16) -> Position {
         Position {
             x: f64::from(x),
@@ -14,10 +16,12 @@ impl Position {
         }
     }
 
+    /// Get the x coordinate
     pub fn x(&self) -> u16 {
         self.x as u16
     }
 
+    /// Get the y coordinate
     pub fn y(&self) -> u16 {
         self.y as u16
     }
