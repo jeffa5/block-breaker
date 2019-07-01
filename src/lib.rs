@@ -15,4 +15,7 @@ mod vector;
 pub use ball::Ball;
 pub use bar::Bar;
 pub use block::Block;
+pub use dimensions::Dimensions;
 pub use gamestate::GameState;
+pub use position::Position;
+pub use vector::Vector;
