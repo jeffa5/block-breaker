@@ -2,6 +2,7 @@ use crate::dimensions::Dimensions;
 use crate::position::Position;
 use crate::vector::Vector;
 
+/// The ball
 pub struct Ball {
     position: Position,
     velocity: Vector,
@@ -10,27 +11,34 @@ pub struct Ball {
 }
 
 impl Ball {
-    pub fn new(pos: Position, game_dimensions: Dimensions) -> Ball {
+    /// Create a new ball
+    ///
+    /// The power of a ball is the amount of damage it does to blocks when it collides
+    pub fn new(position: Position, game_dimensions: Dimensions, power: u16) -> Ball {
         Ball {
-            position: pos,
+            position,
             velocity: Vector::new(0., 1.),
-            power: 1,
+            power,
             game_dimensions,
         }
     }
 
+    /// Get the x coordinate of the ball
     pub fn x(&self) -> u16 {
         self.position.x()
     }
 
+    /// Get the y coordinate of the ball
     pub fn y(&self) -> u16 {
         self.position.y()
     }
 
+    /// Get the power of the ball
     pub fn power(&self) -> u16 {
         self.power
     }
 
+    /// Update the game dimensions, this moves the ball back into view if it wouldn't be in the new dimensions
     pub fn update_dimensions(&mut self, dimensions: Dimensions) {
         self.game_dimensions = dimensions;
         if self.x() >= self.game_dimensions.width() {
@@ -41,6 +49,7 @@ impl Ball {
         }
     }
 
+    /// Make the ball take a step
     pub fn tick(&mut self) {
         let mut new_position = &self.position + &self.velocity;
 
@@ -56,6 +65,7 @@ impl Ball {
         self.position = new_position
     }
 
+    /// Bounce the ball off in a normal
     pub fn bounce(&mut self, normal: Vector) {
         self.velocity -= 2. * self.velocity.dot(&normal) * normal;
         self.velocity.normalise()
@@ -68,7 +78,7 @@ mod tests {
 
     #[test]
     fn bounce_works() {
-        let mut ball = Ball::new(Position::new(0, 0), Dimensions::new(100, 100));
+        let mut ball = Ball::new(Position::new(0, 0), Dimensions::new(100, 100), 1);
 
         // ball is initially travelling directly down
         // bouncing in (0, -1) should make it's velocity (0, -1)
