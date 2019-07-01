@@ -5,7 +5,7 @@ repository = "https://github.com/jeffa5/block-breaker"
 readme = "README.md"
 license = "MIT"
 keywords = ["game", "block", "breaker"]
-version = "0.2.0"
+version = "0.2.1"
 authors = ["Jeffas <dev@jeffas.io>"]
 edition = "2018"
 
