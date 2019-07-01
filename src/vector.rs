@@ -1,6 +1,7 @@
 use crate::position::Position;
 use std::ops::{Add, AddAssign, Mul, Sub, SubAssign};
 
+/// A 2D vector
 #[derive(Debug, PartialEq)]
 pub struct Vector {
     x: f64,
@@ -8,33 +9,40 @@ pub struct Vector {
 }
 
 impl Vector {
+    /// Create a new vector
     pub fn new(x: f64, y: f64) -> Vector {
         let mut v = Vector { x, y };
         v.normalise();
         v
     }
 
+    /// Get the x value
     pub fn x(&self) -> f64 {
         self.x
     }
 
+    /// Get the y value
     pub fn y(&self) -> f64 {
         self.y
     }
 
+    /// Perform the inner product with another vector
     pub fn dot(&self, other: &Vector) -> f64 {
         self.x * other.x + self.y * other.y
     }
 
+    /// Negate the vector, negating each of the components
     pub fn negate(&mut self) {
         self.x = -self.x;
         self.y = -self.y;
     }
 
+    /// Get the length (magnitude) of the vector
     pub fn magnitude(&self) -> f64 {
         (self.x.powi(2) + self.y.powi(2)).sqrt()
     }
 
+    /// Normalise the vector
     pub fn normalise(&mut self) {
         let magnitude = self.magnitude();
         self.x /= magnitude;
