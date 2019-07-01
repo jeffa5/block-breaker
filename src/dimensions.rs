@@ -1,6 +1,7 @@
 type Height = u16;
 type Width = u16;
 
+/// Generic dimensions
 #[derive(Clone)]
 pub struct Dimensions {
     width: Width,
@@ -8,15 +9,18 @@ pub struct Dimensions {
 }
 
 impl Dimensions {
+    /// Create a new set of dimensions
     pub fn new(width: Width, height: Height) -> Dimensions {
         Dimensions { width, height }
     }
 
-    pub fn width(&self) -> u16 {
+    /// Get the width
+    pub fn width(&self) -> Width {
         self.width
     }
 
-    pub fn height(&self) -> u16 {
+    /// Get the height
+    pub fn height(&self) -> Height {
         self.height
     }
 }
