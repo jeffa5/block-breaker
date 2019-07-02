@@ -2,7 +2,7 @@ type Height = u16;
 type Width = u16;
 
 /// Generic dimensions
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct Dimensions {
     width: Width,
     height: Height,
