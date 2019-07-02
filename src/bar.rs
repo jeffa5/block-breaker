@@ -14,11 +14,14 @@ pub struct Bar {
 impl Bar {
     /// Create a new bar
     pub fn new(position: Position, dimensions: Dimensions, game_dimensions: Dimensions) -> Bar {
-        Bar {
+        let mut player_bar = Bar {
             dimensions,
             position,
-            game_dimensions,
-        }
+            game_dimensions: game_dimensions.clone(),
+        };
+        // enforce constraints on the position
+        player_bar.update_dimensions(game_dimensions);
+        player_bar
     }
 
     /// Move the bar one unit left
