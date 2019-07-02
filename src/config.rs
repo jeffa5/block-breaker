@@ -9,3 +9,15 @@ pub struct Config {
     /// The strength of the ball
     pub ball_power: u16,
 }
+
+impl Config {
+    /// Create a new config
+    pub fn new(block_density: f64, block_strength: u16, bar_width: u16, ball_power: u16) -> Self {
+        Self {
+            block_density,
+            block_strength,
+            bar_width,
+            ball_power,
+        }
+    }
+}

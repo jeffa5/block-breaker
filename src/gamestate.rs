@@ -23,7 +23,7 @@ impl GameState {
     /// Create a new GameState struct.
     /// Uses width and height to set the game dimensions and along with the config generate the blocks in the game.
     /// Generation of the blocks uses some padding around the game_dimensions so blocks aren't too close to the edge.
-    pub fn new(width: u16, height: u16, config: Config) -> GameState {
+    pub fn new(width: u16, height: u16, config: &Config) -> GameState {
         let block_dimensions = Dimensions::new(3, 1);
         let mut blocks = Vec::new();
         for x in ((width / 10)..(width * 9 / 10)).step_by(block_dimensions.width() as usize) {
